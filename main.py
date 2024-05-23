@@ -14,16 +14,18 @@ class   MainProgram:
 
     def run(self):
         # checks weather a pack.yaml file exists
-        if (os.path.isfile("pack.yaml") == False):
+        if not os.path.isfile("pack.yaml"):
             print("[ERROR]: There is no pack.yaml file!. Check weather you are in the right directory or create a pack.yaml.", file=sys.stderr)
             sys.exit(1)
+        if not lib.pre_commit_config_exists():
+            # create it
+            lib.create_pre_commit_config_file()
         # sets curr_yaml_version
-        print(f"pre_commit_config_exists(): {lib.pre_commit_config_exists()}")
         lib.get_curr_yaml_version(self)
         # sets pack_yaml_version
         lib.get_pack_yaml_version(self)
         # compares curr_yaml_version and pack_yaml_version values
-        if (lib.is_diff_yaml_versions(self) == False):
+        if not lib.is_diff_yaml_versions(self):
             lib.display_warning(self)
         option = input("Do you want to continue with the commit? [y/n]: ").upper()
         if (option == 'Y'):
