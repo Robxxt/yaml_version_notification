@@ -27,7 +27,7 @@ class   MainProgram:
         # sets pack_yaml_version
         lib.get_pack_yaml_version(self)
         # compares curr_yaml_version and pack_yaml_version values
-        if not lib.is_diff_yaml_versions(self):
+        if lib.is_diff_yaml_versions(self):
             lib.display_warning(self)
         option = input("Do you want to continue with the commit? [y/n]: ").upper()
         if (option == 'Y'):
