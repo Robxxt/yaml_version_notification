@@ -21,9 +21,9 @@ class   MainProgram:
             # create it
             lib.create_pre_commit_config_file()
             # validate .pre-commit-config file
-            # lib.install_pre_commit()
+            lib.execute("pre-commit validate-config")
             # install it
-            # lib.install_pre_commit()
+            lib.execute("pre-commit install")
         # sets curr_yaml_version
         lib.get_curr_yaml_version(self)
         # sets pack_yaml_version
@@ -38,6 +38,8 @@ class   MainProgram:
             sys.exit(1)
         if (option == 'Y'):
             # run precommit
+            lib.execute("pre-commit autoupdate")
+            lib.execute("pre-commit run --all-files")
             print("Calling pre-commit ...")
         else:
             print("See you once you fix it!")

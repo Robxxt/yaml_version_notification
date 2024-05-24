@@ -1,6 +1,7 @@
 import subprocess
 import sys
 import os
+import lib
 
 '''
 check if .pre-commit-config.yaml file exists
@@ -34,16 +35,9 @@ def create_pre_commit_config_file():
     with open('.pre-commit-config.yaml', 'w') as file:
         file.write('---\nThis is a template pre-commit-config file')
 
-'''
-run auto-update
-'''
-def auto_update_pre_commit_config():
-    try:
-        command = subprocess.run('pre-commit auto-update', shell=True)
-        # still to see what is the valid output code
-        if (command.returncode != 0):
-            print('Invalid [pre-commit auto-update]', file=sys.stderr)
-            sys.exit(1)
-    except:
-        print('There was a problem executing [pre-commit auto-update]', file=sys.stderr)
-        sys.exit(1)
+#to remove
+def validate_pre_commit():
+    lib.execute("pre-commit validate-config")
+#to remove
+def install_pre_commit():
+    lib.execute("pre-commit install")
