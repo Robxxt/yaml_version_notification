@@ -15,7 +15,12 @@ class   MainProgram:
     def run(self):
         # checks weather a pack.yaml file exists
         if not os.path.isfile("pack.yaml"):
-            print("[ERROR]: There is no pack.yaml file!. Check weather you are in the right directory or create a pack.yaml.", file=sys.stderr)
+            print(
+                """
+                ERROR]: There is no pack.yaml file!. Check weather you are
+                in the right directory or create a pack.yaml.
+                """
+            , file=sys.stderr)
             sys.exit(1)
         if not os.path.isfile('.pre-commit-config.yaml'):
             # create it
