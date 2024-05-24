@@ -10,18 +10,6 @@ def get_curr_yaml_version(app):
     app.curr_yaml_version = "1.0.1"
 
 '''
-Searches for the yaml file, once it finds it, captures the version
-and sets app.pack_yaml_version = "mj.fa.mn" where mj is major,
-fa is feature and mn is minimum
-'''
-def get_pack_yaml_version(app):
-    try:
-        app.pack_yaml_version = subprocess.run("grep version pack.yaml | awk '{print $2}'", shell=True, text=True, capture_output=True).stdout.rstrip()
-    except:
-        print('Failed to get_pack_yaml_version!', file=sys.stderr)
-        sys.exit(1)
-
-'''
 Compares self.curr_yaml_version and self.pack_yaml_version if they are different
 return false otherwise true
 '''

@@ -17,7 +17,7 @@ class   MainProgram:
         if not os.path.isfile("pack.yaml"):
             print("[ERROR]: There is no pack.yaml file!. Check weather you are in the right directory or create a pack.yaml.", file=sys.stderr)
             sys.exit(1)
-        if not lib.pre_commit_config_exists():
+        if not os.path.isfile('.pre-commit-config.yaml'):
             # create it
             lib.create_pre_commit_config_file()
             # validate .pre-commit-config file
@@ -27,7 +27,7 @@ class   MainProgram:
         # sets curr_yaml_version
         lib.get_curr_yaml_version(self)
         # sets pack_yaml_version
-        lib.get_pack_yaml_version(self)
+        self.pack_yaml_version = lib.execute("grep version pack.yaml | awk '{print $2}'").stdout.rstrip()
         # compares curr_yaml_version and pack_yaml_version values
         if lib.is_diff_yaml_versions(self):
             lib.display_warning(self)

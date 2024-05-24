@@ -1,14 +1,3 @@
-import subprocess
-import sys
-import os
-
-'''
-check if .pre-commit-config.yaml file exists
-'''
-def pre_commit_config_exists():
-    return os.path.isfile('.pre-commit-config.yaml')
-
-
 '''
 create .pre-commit-config.yaml template file
 '''
