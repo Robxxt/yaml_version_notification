@@ -10,9 +10,8 @@ def execute(command):
         command = subprocess.run(command, shell=True, text=True, capture_output=True)
         # still to see what is the valid output code
         if (command.returncode != 0):
-            print(command.stderr, file=sys.stderr)
+            print(f"\n[ERROR]:\n{command.stdout}", file=sys.stderr)
             sys.exit(1)
         return command
     except:
-        print('There was a problem executing', file=sys.stderr)
         sys.exit(1)
