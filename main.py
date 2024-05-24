@@ -20,6 +20,8 @@ class   MainProgram:
         if not lib.pre_commit_config_exists():
             # create it
             lib.create_pre_commit_config_file()
+            #install it
+            # lib.install_pre_commit()
         # sets curr_yaml_version
         lib.get_curr_yaml_version(self)
         # sets pack_yaml_version

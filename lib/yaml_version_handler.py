@@ -26,7 +26,7 @@ Compares self.curr_yaml_version and self.pack_yaml_version if they are different
 return false otherwise true
 '''
 def is_diff_yaml_versions(app):
-        return app.curr_yaml_version == app.pack_yaml_version
+        return app.curr_yaml_version != app.pack_yaml_version
 
 def display_warning(app):
     print('[WARNING]: YOU SHOULD TAKE A LOOK AT pack.yaml version')
