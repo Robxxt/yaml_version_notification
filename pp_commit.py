@@ -52,6 +52,9 @@ class   MainProgram:
             print("See you once you fix it!")
             sys.exit(0)
 
-if __name__ == '__main__':
+def main():
     app = MainProgram()
     app.run()
+
+if __name__ == '__main__':
+    main()
