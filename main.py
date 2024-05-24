@@ -29,7 +29,7 @@ class   MainProgram:
         # sets pack_yaml_version
         self.pack_yaml_version = lib.execute("grep version pack.yaml | awk '{print $2}'").stdout.rstrip()
         # compares curr_yaml_version and pack_yaml_version values
-        if lib.is_diff_yaml_versions(self):
+        if self.curr_yaml_version != self.pack_yaml_version:
             lib.display_warning(self)
         try:
             option = input("Do you want to continue with the commit? [y/n]: ").upper()
