@@ -1,7 +1,6 @@
 import subprocess
 import sys
 import os
-import lib
 
 '''
 check if .pre-commit-config.yaml file exists
