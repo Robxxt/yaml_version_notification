@@ -20,7 +20,9 @@ class   MainProgram:
         if not lib.pre_commit_config_exists():
             # create it
             lib.create_pre_commit_config_file()
-            #install it
+            # validate .pre-commit-config file
+            # lib.install_pre_commit()
+            # install it
             # lib.install_pre_commit()
         # sets curr_yaml_version
         lib.get_curr_yaml_version(self)
@@ -29,7 +31,11 @@ class   MainProgram:
         # compares curr_yaml_version and pack_yaml_version values
         if lib.is_diff_yaml_versions(self):
             lib.display_warning(self)
-        option = input("Do you want to continue with the commit? [y/n]: ").upper()
+        try:
+            option = input("Do you want to continue with the commit? [y/n]: ").upper()
+        except:
+            print('\nGood bye!')
+            sys.exit(1)
         if (option == 'Y'):
             # run precommit
             print("Calling pre-commit ...")
