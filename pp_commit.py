@@ -16,6 +16,7 @@ class   MainProgram:
 
     def run(self):
         # checks weather a pack.yaml file exists
+        lib.pre_commit_requirement()
         if not os.path.isfile("pack.yaml"):
             print(
                 """
@@ -28,13 +29,13 @@ class   MainProgram:
             # create it
             lib.create_pre_commit_config_file()
             # validate .pre-commit-config file
-            lib.execute("pre-commit validate-config")
+            lib.execute_exit("pre-commit validate-config")
             # install it
-            lib.execute("pre-commit install")
+            lib.execute_exit("pre-commit install")
         # sets curr_yaml_version
         lib.get_curr_yaml_version(self)
         # sets pack_yaml_version
-        self.pack_yaml_version = lib.execute("grep version pack.yaml | awk '{print $2}'").stdout.rstrip()
+        self.pack_yaml_version = lib.execute_exit("grep version pack.yaml | awk '{print $2}'").stdout.rstrip()
         # compares curr_yaml_version and pack_yaml_version values
         if self.curr_yaml_version != self.pack_yaml_version:
             lib.display_warning(self)
@@ -45,8 +46,8 @@ class   MainProgram:
             sys.exit(1)
         if (option == 'Y'):
             # run precommit
-            lib.execute("pre-commit autoupdate")
-            lib.execute("pre-commit run --all-files")
+            lib.execute_exit("pre-commit autoupdate")
+            lib.execute_exit("pre-commit run --all-files")
             print("Calling pre-commit ...")
         else:
             print("See you once you fix it!")
