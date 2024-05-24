@@ -2,3 +2,4 @@ pack.yaml
 test
 *cache*
 .pre-commit-config.yaml
+pp_commit.egg-info
