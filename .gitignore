@@ -5,3 +5,4 @@ test
 pp_commit.egg-info
 build
 dist
+CHANGES.md

@@ -32,26 +32,32 @@ class   MainProgram:
             lib.execute_exit("pre-commit validate-config")
             # install it
             lib.execute_exit("pre-commit install")
-        # sets curr_yaml_version
-        lib.get_curr_yaml_version(self)
+            pass
+        if not os.path.isfile('CHANGES.md'):
+            print("[ERROR]: It's missing CHANGES.md", file=sys.stderr)
+            exit(1)
+        # sets curr_yaml_version based on the last version from CHANGES.md
+        self.curr_yaml_version = lib.execute_exit("egrep '## \[' CHANGES.md | head -1 | awk '{print $2}'").stdout[1:-2]
         # sets pack_yaml_version
         self.pack_yaml_version = lib.execute_exit("grep version pack.yaml | awk '{print $2}'").stdout.rstrip()
         # compares curr_yaml_version and pack_yaml_version values
         if self.curr_yaml_version != self.pack_yaml_version:
             lib.display_warning(self)
-        try:
-            option = input("Do you want to continue with the commit? [y/n]: ").upper()
-        except:
-            print('\nGood bye!')
-            sys.exit(1)
-        if (option == 'Y'):
-            # run precommit
+            try:
+                option = input("Do you want to continue with the commit? [y/n]: ").upper()
+            except:
+                print('\nGood bye!')
+                sys.exit(1)
+            if (option == 'Y'):
+                # run precommit
+                lib.execute_exit("pre-commit autoupdate")
+                lib.execute_exit("pre-commit run --all-files")
+            else:
+                print("See you once you fix it!")
+                sys.exit(0)
+        else:
             lib.execute_exit("pre-commit autoupdate")
             lib.execute_exit("pre-commit run --all-files")
-            print("Calling pre-commit ...")
-        else:
-            print("See you once you fix it!")
-            sys.exit(0)
 
 def main():
     app = MainProgram()
